@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <script src="static/110100.js"></script>
+
+</head>
+<body style="height:100%;">
+<div id="main" style="width:100%;height:100%;"></div>
+<script>
+    (function ($) {
+        $.getUrlParam = function (name, aTarget) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = aTarget.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+    })(jQuery);
+    var myChart = echarts.init(document.getElementById("main"));
+    {#var code = $.getUrlParam('110100', self);#}
+    var code = '北京市';
+    $.getJSON("{{ url_for('static',filename='110100.js') }}", function (geoJson) {
+
+        echarts.registerMap(code, geoJson);
+        myChart.setOption(
+            option = {
+                visualMap: {
+                    min: 0,
+                    max: 10,
+                    text: ['High', 'Low'],
+                    seriesIndex: [1],                   //必须设置此项,否则会覆盖标注点颜色
+                    realtime: true,
+                    calculable: true,
+                    inRange: {
+                        color: ['lightskyblue', 'yellow', 'orangered']
+                    },
+                    textStyle: {
+                        color: 'lime'
+                    }
+                },
+                geo: {
+                    map: '北京市',
+                    roam: true,
+                    label: {
+                        normal: {
+                            show: true,
+                            textStyle: {
+                                color: '#3ebee6'
+                            }
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgba(0, 0, 0, 0.2)'
+                        },
+                        emphasis: {
+                            areaColor: null,
+                            shadowOffsetX: 0,
+                            shadowOffsetY: 0,
+                            shadowBlur: 20,
+                            borderWidth: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        roam: true,
+                        type: 'scatter',
+                        coordinateSystem: 'geo',
+
+
+                    }
+                ]
+            });
+    });
+
+
+</script>
+</body>
+</html>

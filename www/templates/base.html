@@ -30,9 +30,14 @@
     <link href="/static/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link href="/static/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
-
+    <style>
+        #sss{
+            background-image: url("../static/img/1.png");
+        }
+    </style>
 </head>
-<body class="skin-blue">
+<body id="sss">
+{#<body class="skin-blue">#}
 <!-- header logo: style can be found in header.less -->
 <header class="header">
     <a href="index.html" class="logo">
@@ -312,7 +317,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="active">
-                    <a href="#">
+                    <a href="/">
                         <i class="fa fa-dashboard"></i> <span>仪表盘</span>
                     </a>
                 </li>
@@ -425,7 +430,8 @@
     <aside class="right-side">
         <!-- Content Header (Page header) -->
 
-        <section class="content-header">
+        <section class="content-header" id="sss">
+{#        <section class="content-header">#}
             {% block right %}
 
             {% endblock right %}
@@ -433,6 +439,8 @@
 
         <!-- Main content -->
         <section class="content">
+{#        <section class="content" id="sss">#}
+
 
             {% block main %}
 
